@@ -1,0 +1,5 @@
+#!/usr/bin/env python2
+
+Name = ['Bob', 'Lisa', 'Jack']
+for name in Name:
+print('Hello,'+name) 
