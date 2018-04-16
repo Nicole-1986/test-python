@@ -1,0 +1,36 @@
+## 以下的import matplotlib as mpl和mpl.use('Agg')这两行很关键，如果没有这两行 可能会执行失败
+
+#!/usr/bin/env python2
+import matplotlib as mpl
+mpl.use('Agg')
+import numpy as np
+import matplotlib.pyplot as plt
+
+## arange([start,] stop[, step,], dtype=None)根据start与stop指定的范围以及step设定的步长，生成一个 ndarray。
+## 所画的横轴为：从[0-10），以1为步长进行累加
+xData = np.arange(0, 10, 1)
+
+## 所画的纵轴为两位数，0，10,20，30   如果yData1 = xData.__pow__(4.0),则纵轴为四位数：0,1000,2000,3000，4000.。。。。。。
+yData1 = xData.__pow__(2.0)
+
+## 横轴从[0-10）,纵轴从15开始 到61，步长为5进行累加
+yData2 = np.arange(15, 61, 5)
+
+## 所画的图表数量为1，尺寸为8X6的图表
+plt.figure(num=1, figsize=(8, 6))
+
+## 图表的title为Plot 1，字号为14； 横轴名字为x-axis，字号为14；纵轴名字为y-axis，字号为14
+plt.title('Plot 1', size=14)
+plt.xlabel('x-axis', size=14)
+plt.ylabel('y-axis', size=14)
+
+## label为y1 data的是蓝色的虚线
+## label为y2 data的是红色的实线
+plt.plot(xData, yData1, color='b', linestyle='--', marker='o', label='y1 data')
+plt.plot(xData, yData2, color='r', linestyle='-', label='y2 data')
+
+## 图表的title位于右上角，如果是 lt.legend(loc='upper left')则是位于左上角
+plt.legend(loc='upper right')
+
+## 保存图片为plot2.png文件
+plt.savefig('plot2.png')
