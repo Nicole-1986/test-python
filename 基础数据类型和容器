@@ -1,0 +1,252 @@
+  1.基础数据类型
+    Python3中有六个标准的数据类型（最后4个分到容器里讲述更为合适）：
+    • Number（数字）
+    • String（字符串）
+    • List（列表）
+    • Tuple（元组）
+    • Sets（集合）
+    • Dictionary（字典）
+
+    1）Number（数字）
+      python3中常见的数字类型为int（整数），float（浮点数），bool（布尔值），complex（复数）。
+      例：
+      >>> a,b,c,d=100,0.25,True,4+3j
+      >>> print (type(a),type(b),type(c),type(d))
+      (<type 'int'>, <type 'float'>, <type 'bool'>, <type 'complex'>)
+    2）String（字符串）--元组和字符串都是不可变的序列
+      python中字符串一般用单引号或者双引号括起来，索引值以0为开始值，-1为从末尾的开始值（即Hello中H为0，e为1，以此类推），
+      >>> f='Hello World'
+      >>> print(f,f[0:5],f[-5:],type(f))
+      ('Hello World', 'Hello', 'World', <type 'str'>)
+      字符串相加：
+        >>> H,W='Hello','World'
+        >>> print(H+W,H*2)
+        ('HelloWorld', 'HelloHello')
+      字符串的格式化输出：
+        >>> str1='2.My name is %s, and my wife is %s' % ('Simon', 'beautiful')
+        >>> print str1
+        2.My name is Simon, and my wife is beautiful
+-------------------------------
+2.容器
+	这里的容器主要包括4中类型（主要是列表和字典）：
+  List（列表）         [ ]
+  Tuple（元组）        ( )
+  Sets（集合）set      ( )
+  Dictionary（字典）   { }
+
+	1）List（列表）
+    List的优势在于有序且可以修改，这就方便我们查询数据，以及增加和删减数据。
+    其中最为常用的就是切片，查询，修改数据，增加数据和删减数据的功能，List是可以叠加的
+    创建列表
+      >>> L1=['Bob','30','Male','Beijing','teacher']
+      >>> print L1
+      ['Bob', '30', 'Male', 'Beijing', 'teacher']
+    查看指定的元素：
+      >>> L1=['Bob','30','Male','Beijing','teacher']
+      >>> print (L1,L1[0:2])
+      (['Bob', '30', 'Male', 'Beijing', 'teacher'], ['Bob', '30'])
+      >>> print (L1[4:5])
+      ['teacher']
+      >>> print (L1[-3])
+      Male
+      >>> print (L1[-3:])
+      ['Male', 'Beijing', 'teacher']
+      >>> 
+    增加元素
+      （1）append在尾部追加一个元素，参数不能为空，否则报错
+      >>> L1.append('Apple')
+      >>> print L1
+      ['Bob', '30', 'Male', 'Beijing', 'teacher', 'Apple']
+      （2）extend:向列表末尾添加多个元素，参数不能为空，不能是int型，可为字符串（当成列表处理，每个字符就是一个元素）、元组、列表。
+      参数为字符串：tempList.extend("str") ->tempList = ["one","two","three","s","t","r"]。
+      参数为元组或列表：tempList.extend(("four",“five”)) ->tempList = ["one","two","three","four",“five”]。
+      （3）list[index:index] = [value]:向列表list指定的位置index插入一个元素
+      如：tempList[1:1] = ["add"] -> tempList = ["one","add","two","three"].
+      注：更一般的形式：listname[start:end] = 元组/列表/字符串，可插入多个元素.
+
+    修改元素：
+      >>> L1[-1]='Banana'
+      >>> print L1
+      ['Bob', '30', 'Male', 'Beijing', 'teacher', 'Banana']
+    删除元素
+      >>> del L1[-1]
+      >>> print L1
+      ['Bob', '30', 'Male', 'Beijing', 'teacher']
+      >>> del L1[1]
+      >>> print L1
+      ['Bob', 'Male', 'Beijing', 'teacher']
+    List叠加：
+      >>> print (L1+['True'])
+      ['Bob', 'Male', 'Beijing', 'teacher', 'True']
+      >>> print L1
+      ['Bob', 'Male', 'Beijing', 'teacher']
+      >>> L=L1+['AA']
+      >>> print L1
+      ['Bob', 'Male', 'Beijing', 'teacher']
+      >>> print L
+      ['Bob', 'Male', 'Beijing', 'teacher', 'AA']
+    高级操作：
+      (1)产生一个数值递增列表：
+        1)pList = range(N)，产生一个元素值为0~N-1的列表。如：pList = range(10) ->pList = [0,1,2,3,...,9]。
+        2)pList = range(sn,en),产生一个元素值为sn~en-1的列表。如：pList =  range(1,5) ->pList = [1,2,3,4]。
+        3)pList = range(sn,en,inc),产生一个元素值以inc递增的列表。如：pList = range(1,10,2) ->pList = [1,3,5,7,9]
+      (2)固定值初始化：
+        pList = [value for index  in range(N)]，产生一个长度为N的列表，元素值都为value.
+        如：value = "x",N=10,则pLsit = ["x","x",...,"x"]
+        更简单的形式：pList = [value]*N。
+      (3)操作符：
+        1)"+"：两个列表相加，将合成为一个列表。如 pL1 = [1,2],pL2 = [3,4],pL1+pL2 ->[1,2,3,4]   
+        （注意：list是有顺序的，相加也是，新list第一位是+左边那个，即上边的例子，如果 ,pL2+pL1 ->[3,4,1,2] ）
+        2)"*"：形式：[value]*N。如value="a",N=4,则得到列表["a","a","a","a"]。
+        3)del：del pL[index]:删除指定位置的元素。 del pL[sIndex:eIndex]:删除sIndex~eIndex-1位置的元素。
+      (4)列表复制：
+        1)pL1 = pL
+          pL1为pL的别名，即pL1和pL实质为同一个列表，修改其中一个列表，另一个列表也随之变化。
+          如：pL = [1,2,3],pL1 = pL,pL1[2] = 33,->pL = pL1 = [1,2,33]
+        2)pL2 = pL[:]
+          pL2为pL的一个克隆（或拷贝），即pL2和pL为不同的列表，修改其中一个列表，另一个不会受影响。
+      (5)常用方法：
+        1)L.append(value):向列表末尾插入一个元素
+        2)L.insert(index,value)：向列表的index位置插入一个元素value。
+        3)L.pop(index)： 从列表中删除指定位置index的元素并返回元素值，默认删除最后一个元素。
+        4)L.remove(value)：删除在列表中第一次出现的元素value。如：pList = [1,2,3,2],pList.remove(2) ->pList = [1,3,2]。
+        5)L.count(value)：返回元素value在列表中出现的次数。
+        6)L.index(value) ：该元素第一次出现的的位置,无则抛异常 。
+        7)L.extend(list/tuple/string) ：向列表末尾插入多个元素。
+        8)L.sort()：排序
+        9)L.reverse()：倒序
+
+	2）Tuple（元组）
+    Python 的元组与列表类似，不同之处在于元组的元素不能修改，一旦初始化之后就不可以改变，元组和字符串都是不可变的序列。
+
+    tuple的陷阱： 
+    1.当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来； 
+    2.定义只有一个元素的Tuple的时候，需要这样: 
+    tuple1 = (123,) 
+    后面要加上一个逗号，这是因为括号()既可以表示tuple，又可以表示数学公式中的小括号，这就产生了歧义。 
+    tuple2 = (123) ＃如果你这样定义你定义的将是１２３这个元素，而不是一个元组。 
+    python在显示只有1个元素的tuple时，也会加一个逗号,，以免你误解成数学计算意义上的括号。
+
+    元组的内置函数： 
+    1.比较两个元组元素：cmp(tuple1,tuple2)相等的话返回0，不相等返回1； 
+    2.计算元组的长度：len(tuple 
+    3.返回元组中的最大值最小值：max(tuple),min(tuple)； 
+    4.将列表转换成元组：Tuple = tuple(list)
+
+    创建元祖：
+      >>> T1=('AA','BB','CC','DD')
+      >>> print T1
+      ('AA', 'BB', 'CC', 'DD')
+    迭代：
+      >>> T2=('EE',)    ----注意：这个后边必须有个逗号，否则不能叠加
+      >>> T3=T1+T2
+      >>> print T3
+      ('AA', 'BB', 'CC', 'DD', 'EE'）
+    查询：
+      >>> MB='AA' in T3
+      >>> print MB
+      True
+      >>> MB='FF' in T3
+      >>> print MB
+      False
+    遍历：
+          可用for循环遍历元组。如：for element in tempTuple: print(elment)。
+          可以使用负数作为索引来访问元组。-1代表最后一个元素，-2代表倒数第二个，以此类推
+    3）Sets（集合）
+      Set是一个无序不重复元素的序列，而常用方法是set（value），虽然也可以用{}，但难和字典区分开来。在创建一个空的集合时必须用set(),不能用{}
+      如果你只是想知道某集合中是否存在某个元素而不关心顺序，可以使用set。
+      set()函数可以将其他数据结构变成set类型。如set(‘letter’),不过保存时会发现其中e和t在集合中只有1个。
+
+      创建集合：
+        >>> S1=set(['a','b','c','d'])
+        >>> print S1
+        set(['a', 'c', 'b', 'd'])
+      增加元素：
+        集合add方法：是把要传入的元素做为一个整个添加到集合中
+          >>> a=set('boy')
+          >>> print a
+          set(['y', 'b', 'o'])
+          >>> a.add('python')
+          >>> print a
+          set(['y', 'python', 'b', 'o'])
+        集合update：是把要传入的元素拆分，做为个体传入到集合中
+          >>> a=set('boy')
+          >>> print a
+          set(['y', 'b', 'o'])
+          >>> a.update('python')
+          >>> print a
+          set(['b', 'h', 'o', 'n', 'p', 't', 'y'])
+      删除元素：
+        remove删除
+          >>> A=set(['y', 'python', 'b', 'o'])
+          >>> print A
+          set(['y', 'python', 'b', 'o'])
+          >>> A.remove('python')
+          >>> print A
+          set(['y', 'b', 'o'])
+        discard删除：
+          >>> A=set(['y', 'python', 'b', 'o'])
+          >>> A.discard('y')
+          >>> print A
+          set(['python', 'b', 'o'])
+          >>> A.discard('python')
+          >>> print A
+          set(['b', 'o'])
+      合并数据：
+        a = t | s       t 和 s的并集  
+        b = t & s       t 和 s的交集  
+        c = t – s       求差集（项在t中，但不在s中）  
+        d = t ^ s       对称差集（项在t或s中，但不会同时出现在二者中） 
+        x in s          测试 x 是否是 s 的成员  
+        x not in s      测试 x 是否不是 s 的成员
+      查询数据：
+        >>> S1=set(['a','b','c','d'])
+        >>> print S1
+        set(['a', 'c', 'b', 'd'])
+        >>> a='A'in S1
+        >>> print a
+        False
+        >>> b='a' in S1
+        >>> print b
+        True
+	4）Dictionary（字典）--是无序的，可变的，可以包含任何其他类型
+    字典的每个键值(key=>value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中。
+    字典的好处就是它的每一个关键字都对应一个值，就像我们查英语字典一样。
+    注：键是唯一的，字典只认最后一个赋的键值
+    
+	  常用字典操作： 
+    dic.clear()           清空字典中的元素并返回None 
+    dic.keys()            返回由字典所有键构成的列表。 
+    dic.has_key(key)      检查字典中是否存在键key，有该键返回TRUE，否则FALSE。
+    dic.values()          返回由字典所有值构成的列表。 
+    dic.copy()            复制字典 ，两个字典不是同一个字典
+    dic.pop(k)            删除指定键所对应的项，并返回key对应的值。key不能为空，也不默认删除排在最后的元素，因为字典是无序的，
+    dic.get(key)          获得key对应的值，若key不存在，则返回设置的默认值defualtValue,若没有设置默认值则返回None。
+    dic.update(dic2)      将字典dic2中的元素合并到字典dic中
+    dic.items()           返回由字典所有键值对构成的列表
+    dic.popitem()         随机删除字典中的一个键值对（一项），并返回值。若字典为空则抛出异常。
+    cmp(dict1,dict2)      比较字典，(优先级为元素个数、键大小、键值大小)，第一个大则返回1，第一个小则返回-1，一样大则返回0。
+
+    创建字典：
+      >>> A={'a':'1','b':'2','c':'3','d':'4'}
+      >>> print A
+      {'a': '1', 'c': '3', 'b': '2', 'd': '4'}
+    增加数据：
+      >>> A={'a':'1','b':'2','c':'3','d':'4'}
+      >>> print A
+      {'a': '1', 'c': '3', 'b': '2', 'd': '4'}
+      >>> A ['e']='5'
+      >>> print A
+      {'a': '1', 'c': '3', 'b': '2', 'e': '5', 'd': '4'}
+    删除数据：
+      >>> del A['d']
+      >>> print A
+      {'a': '1', 'c': '3', 'b': '2'}
+    修改数据：
+      A={'a':'1','b':'2','c':'3','d':'4'}
+      >>> print A
+      {'a': '1', 'c': '3', 'b': '2', 'd': '4'}
+      >>> A['a']='20'
+      >>> print A
+      {'a': '20', 'c': '3', 'b': '2', 'd': '4'}
+
