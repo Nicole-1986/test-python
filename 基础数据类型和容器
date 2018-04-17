@@ -1,5 +1,5 @@
   1.基础数据类型
-    Python3中有六个标准的数据类型（最后4个分到容器里讲述更为合适）：
+    Python3中有六个标准的数据类型（最后4个分到容器里）：
     • Number（数字）
     • String（字符串）
     • List（列表）
@@ -18,7 +18,7 @@
       >>> f='Hello World'
       >>> print(f,f[0:5],f[-5:],type(f))
       ('Hello World', 'Hello', 'World', <type 'str'>)
-      字符串相加：
+      字符串拼接，用俩个字符串相加或者一个字符串乘以一个int数字的方法：
         >>> H,W='Hello','World'
         >>> print(H+W,H*2)
         ('HelloWorld', 'HelloHello')
@@ -28,11 +28,11 @@
         2.My name is Simon, and my wife is beautiful
 -------------------------------
 2.容器
-	这里的容器主要包括4中类型（主要是列表和字典）：
-  List（列表）         [ ]
-  Tuple（元组）        ( )
-  Sets（集合）set      ( )
-  Dictionary（字典）   { }
+	这里的容器主要包括4种类型（主要是列表和字典）：
+  List（列表）         [ ]  有序、可改
+  Tuple（元组）        ( )  有序、不可变
+  Sets（集合）set      ( )  无序、不重复、可改
+  Dictionary（字典）   { }  无序、可改、可包含任意类型
 
 	1）List（列表）
     List的优势在于有序且可以修改，这就方便我们查询数据，以及增加和删减数据。
